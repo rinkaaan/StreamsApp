@@ -25,6 +25,11 @@ const items: SideNavigationProps.Item[] = [
     text: "Settings",
     href: "/settings",
   },
+  {
+    type: "link",
+    text: "Subtitle Test",
+    href: "/subtitle-test",
+  },
 ]
 
 export function getCrumbs(matches: UIMatch<string, CrumbHandle>[]) {
@@ -76,7 +81,7 @@ export default function MainLayout() {
   }, [crumbs])
 
   if (location.pathname === "/") {
-    return <Navigate to="/media" replace/>
+    return <Navigate to="/subtitle-test" replace/>
   } else {
     return (
       <Fragment>

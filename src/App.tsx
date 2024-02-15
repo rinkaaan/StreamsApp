@@ -52,8 +52,13 @@ const router = createHashRouter([
         handle: createCrumb("Settings", "/settings"),
       },
       {
+        path: "subtitle-test",
+        lazy: () => import("./routes/subtitle-test/SubtitleTestRoute"),
+        handle: createCrumb("Subtitle Test", "/subtitle-test"),
+      },
+      {
         path: "*",
-        Component: () => <Navigate to="/albums"/>,
+        Component: () => <Navigate to="/subtitle-test"/>,
       }
     ],
   },
