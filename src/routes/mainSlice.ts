@@ -3,6 +3,8 @@ import { FlashbarProps } from "@cloudscape-design/components"
 import { uuid } from "../common/typedUtils"
 import type { RootState } from "../common/reducers"
 
+export type SplitPanelPosition = "side" | "bottom"
+
 export interface MainState {
   navigationOpen: boolean;
   notifications: Array<FlashbarProps.MessageDefinition>;
@@ -11,6 +13,8 @@ export interface MainState {
   dirtyRedirectUrl?: string;
   lockScroll?: boolean;
   startingPath?: string;
+  splitPanelOpen: boolean;
+  splitPanelPosition: SplitPanelPosition;
 }
 
 const initialState: MainState = {
@@ -21,6 +25,8 @@ const initialState: MainState = {
   dirtyRedirectUrl: undefined,
   lockScroll: false,
   startingPath: undefined,
+  splitPanelOpen: true,
+  splitPanelPosition: "side",
 }
 
 type Notification = Pick<FlashbarProps.MessageDefinition, "type" | "content">

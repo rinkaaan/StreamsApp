@@ -1,12 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit"
 import { mainReducer } from "../routes/mainSlice"
-import { albumReducer } from "../routes/albums/albumSlice"
-import { mediaReducer } from "../routes/media/mediaSlice"
+import { playerReducer } from "../routes/subtitle-test/playerSlice"
 
 export const reducers = combineReducers({
   main: mainReducer,
-  album: albumReducer,
-  media: mediaReducer,
+  player: playerReducer,
 })
 
 export type RootState = ReturnType<typeof reducers>

@@ -8,18 +8,11 @@ import { mainActions, mainSelector } from "./mainSlice"
 import { CrumbHandle } from "../App"
 
 import { prepareNotifications } from "../common/storeUtils"
+import CustomSplitPanel from "./subtitle-test/CustomSplitPanel"
+import useWindowSize from "../hooks/useWindowSize"
+import { Breakpoints } from "../common/constants"
 
 const items: SideNavigationProps.Item[] = [
-  {
-    type: "link",
-    text: "All Streams",
-    href: "/media",
-  },
-  {
-    type: "link",
-    text: "Albums",
-    href: "/albums",
-  },
   {
     type: "link",
     text: "Settings",
@@ -61,13 +54,22 @@ export default function MainLayout() {
   const matches = useMatches() as UIMatch<string, CrumbHandle>[]
   const crumbs = getCrumbs(matches)
   const [activeHref, setActiveHref] = useState<string | undefined>(undefined)
-  const { navigationOpen, notifications, dirty, dirtyModalVisible, dirtyRedirectUrl, startingPath } = useSelector(mainSelector)
+  const { navigationOpen, notifications, dirty, dirtyModalVisible, dirtyRedirectUrl, startingPath, splitPanelPosition, splitPanelOpen } = useSelector(mainSelector)
+  const { width } = useWindowSize()
 
   useEffect(() => {
     if (startingPath) {
       navigate(startingPath)
     }
   }, [])
+
+  useEffect(() => {
+    if (width <= Breakpoints.xSmall) {
+      appDispatch(mainActions.updateSlice({ splitPanelPosition: "bottom" }))
+    } else {
+      appDispatch(mainActions.updateSlice({ splitPanelPosition: "side" }))
+    }
+  }, [width])
 
   useEffect(() => {
     // Go from last to first crumb, set activeHref to the first one that matches items
@@ -115,7 +117,14 @@ export default function MainLayout() {
           notifications={
             <Flashbar items={prepareNotifications(notifications)}/>
           }
-          toolsHide
+          splitPanelOpen={splitPanelOpen}
+          onSplitPanelToggle={(e) => {
+            appDispatch(mainActions.updateSlice({ splitPanelOpen: e.detail.open }))
+          }}
+          splitPanel={<CustomSplitPanel />}
+          splitPanelPreferences={{
+            position: splitPanelPosition,
+          }}
         />
         <Modal
           visible={dirtyModalVisible}
