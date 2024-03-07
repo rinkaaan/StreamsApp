@@ -25,7 +25,6 @@ export default function VideoPlayer() {
       style={{
         position: "relative",
         width: "100%",
-        maxWidth: "700px",
       }}
     >
       <video
