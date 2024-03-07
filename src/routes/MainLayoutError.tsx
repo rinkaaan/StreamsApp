@@ -24,7 +24,7 @@ export default function MainLayoutError() {
         }),
       )
     }
-    navigate("/#/media", { replace: true })
+    navigate("/subtitle-test", { replace: true })
   }, [error])
 
   return null

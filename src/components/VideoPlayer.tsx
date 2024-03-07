@@ -34,7 +34,7 @@ export default function VideoPlayer() {
         style={{ display: "block" }}
         ref={videoRef}
         controls={true}
-        src="/tbs mar 05 14 59 58.mp4"
+        src="/video.mp4"
       />
     </div>
   )
