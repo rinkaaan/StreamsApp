@@ -1,5 +1,7 @@
-import { SplitPanel, SplitPanelProps } from "@cloudscape-design/components"
+import { Button, SpaceBetween, SplitPanel, SplitPanelProps } from "@cloudscape-design/components"
 import VideoPlayer from "../../components/VideoPlayer"
+import useWindowSize from "../../hooks/useWindowSize"
+import { Breakpoints } from "../../common/constants"
 
 export const splitPanelI18nStrings: SplitPanelProps.I18nStrings = {
   preferencesTitle: "Split panel preferences",
@@ -15,13 +17,39 @@ export const splitPanelI18nStrings: SplitPanelProps.I18nStrings = {
 }
 
 export default function CustomSplitPanel() {
+  const { width } = useWindowSize()
+
+  function scrollToCurrentTime() {
+    let block: ScrollLogicalPosition = "center"
+
+    if (width < Breakpoints.xSmall) {
+      block = "start"
+    }
+
+    // scroll to element with id of current-subtitle
+    const currentSubtitle = document.getElementById("current-subtitle")
+    if (currentSubtitle) {
+      currentSubtitle.scrollIntoView({ behavior: "instant", block })
+      if (width < Breakpoints.xSmall) {
+        window.scrollBy(0, -110)
+      }
+    }
+  }
+
   return (
     <SplitPanel
       i18nStrings={splitPanelI18nStrings}
-      header={"tbs mar 05 14 45 04"}
+      header="akari"
       hidePreferencesButton
     >
-      <VideoPlayer />
+      <SpaceBetween size="m" direction="vertical">
+        <VideoPlayer />
+        <Button
+          onClick={scrollToCurrentTime}
+        >
+          Jump to current time
+        </Button>
+      </SpaceBetween>
     </SplitPanel>
   )
 }

@@ -2,11 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../../common/reducers"
 
 export interface PlayerState {
-  currentTime: number
+  currentTime: number;
+  newTime: number;
 }
 
 const initialState: PlayerState = {
   currentTime: 0,
+  newTime: 0,
 }
 
 export const playerSlice = createSlice({

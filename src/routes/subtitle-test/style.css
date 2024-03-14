@@ -1,0 +1,31 @@
+thead * {
+     border: none !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+thead {
+    height: 4px !important;
+}
+
+.result {
+    display: block;
+    word-break: break-word;
+    white-space: normal;
+}
+
+.translation {
+    margin-top: 2px;
+    opacity: 0.5;
+}
+
+#current-subtitle {
+    /*color: #0000FFFF;*/
+    background-color: yellow;
+    width: fit-content;
+}
+
+.timestamp {
+    cursor: pointer;
+}

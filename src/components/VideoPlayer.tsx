@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from "react"
 import { appDispatch } from "../common/store"
-import { playerActions } from "../routes/subtitle-test/playerSlice"
+import { playerActions, playerSelector } from "../routes/subtitle-test/playerSlice"
+import { useSelector } from "react-redux"
 
 export default function VideoPlayer() {
   const videoContainerRef = useRef<HTMLDivElement>(null) // Ref for the container
   const videoRef = useRef<HTMLVideoElement>(null)
+  const { newTime } = useSelector(playerSelector)
 
   useEffect(() => {
     const video = videoRef.current
@@ -18,6 +20,13 @@ export default function VideoPlayer() {
       return () => video.removeEventListener("timeupdate", () => {})
     }
   }, [videoRef])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (video) {
+      video.currentTime = newTime
+    }
+  }, [newTime])
 
   return (
     <div
@@ -33,7 +42,8 @@ export default function VideoPlayer() {
         style={{ display: "block" }}
         ref={videoRef}
         controls={true}
-        src="/video.mp4"
+        // src="/akari.mp4"
+        src="https://testphotos.lincolnnguyen.me/file/nguylinc-photos-test/streams/akari.mp4"
       />
     </div>
   )
